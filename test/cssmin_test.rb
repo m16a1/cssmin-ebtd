@@ -8,8 +8,8 @@ describe CSSMin do
   subject { CSSMin.minify(css) }
 
   describe 'stripping comments and whitespace that are not required' do
-    let(:css) { IO.read('test/fixtures/comments.css') }
-    let(:expected_minified_css) { IO.read('test/fixtures/comments.css.min').strip }
+    let(:css) { File.read('test/fixtures/comments.css') }
+    let(:expected_minified_css) { File.read('test/fixtures/comments.css.min').strip }
 
     it { subject.must_equal expected_minified_css }
   end
