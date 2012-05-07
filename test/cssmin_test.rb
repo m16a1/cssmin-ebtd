@@ -25,4 +25,9 @@ describe CSSMin do
   describe 'removing redundant zeros' do
     run_test_from_fixture('test/fixtures/zeros.css')
   end
+
+  describe 'webkit transform' do
+    it { skip "not yet supported" }
+    #run_test_from_fixture('test/fixtures/webkit-transform.css')
+  end
 end
