@@ -22,14 +22,7 @@ describe CSSMin do
     run_test_from_fixture('test/fixtures/media-multi.css')
   end
 
-  #describe 'run all the tests' do
-    #Dir['test/fixtures/*.css'].each do |css|
-      #it {
-        #input = File.read(css)
-        #expected = File.read(css + ".min").strip
-        #CSSMin.minify(input).must_equal expected
-      #}
-    #end
-  #end
-
+  describe 'removing redundant zeros' do
+    run_test_from_fixture('test/fixtures/zeros.css')
+  end
 end
