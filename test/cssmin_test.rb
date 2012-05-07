@@ -30,4 +30,9 @@ describe CSSMin do
     it { skip "not yet supported" }
     #run_test_from_fixture('test/fixtures/webkit-transform.css')
   end
+
+  describe 'preserving special comments' do
+    it { skip("not yet supported") }
+    #run_test_from_fixture('test/fixtures/string-in-comment.css')
+  end
 end
