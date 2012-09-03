@@ -32,8 +32,6 @@ require 'rdoc/task'
 require 'rake/testtask'
 
 gemspec = Gem::Specification.new do |s|
-  s.rubyforge_project = 'riposte'
-
   s.name     = 'cssmin'
   s.version  = '1.0.3'
   s.author   = 'Ryan Grove'
@@ -67,3 +65,5 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/*_test.rb']
   t.verbose = true
 end
+
+task :default => :test
