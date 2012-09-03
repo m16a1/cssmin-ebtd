@@ -21,4 +21,11 @@ describe CSSMin do
     it { subject.must_equal expected_minified_css }
   end
 
+  describe 'replace none with 0 for border and background' do
+    let(:css) { IO.read('test/fixtures/none.css') }
+    let(:expected_minified_css) { IO.read('test/fixtures/none.min.css').strip }
+
+    it { subject.must_equal expected_minified_css }
+  end
+
 end

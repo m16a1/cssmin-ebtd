@@ -107,6 +107,9 @@ module CSSMin
     # Prevent redundant semicolons.
     css.gsub!(/;+\}/, '}')
 
+    css.gsub!(/(\W)border:none(\W)/, '\1border:0\2')
+    css.gsub!(/(\W)background:none(\W)/, '\1background:0\2')
+
     css.strip
   end
 
