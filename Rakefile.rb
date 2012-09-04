@@ -41,7 +41,7 @@ gemspec = Gem::Specification.new do |s|
   s.summary  = 'Ruby library for minifying CSS.'
   s.description  = "Ruby library for minifying CSS. Forked from cssmin by ebaytoday's team."
 
-  s.files        = FileList['{lib}/**/*', 'HISTORY', 'LICENSE'].to_a
+  s.files        = FileList['{lib}/**/*', 'Readme.md', 'LICENSE'].to_a
   s.require_path = 'lib'
   s.has_rdoc     = true
 
