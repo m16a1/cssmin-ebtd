@@ -53,38 +53,38 @@ module CSSMin
     css = input.is_a?(IO) ? input.read : input.dup.to_s
 
     # Remove comments.
-    css.gsub!(/\/\*[\s\S]*?\*\//, '')
+    css.gsub! /\/\*[\s\S]*?\*\//, ''
 
     # Compress all runs of whitespace to a single space to make things easier
     # to work with.
-    css.gsub!(/\s+/, ' ')
+    css.gsub! /\s+/, ' '
 
     # Replace box model hacks with placeholders.
-    css.gsub!(/"\\"\}\\""/, '___BMH___')
+    css.gsub! /"\\"\}\\""/, '___BMH___'
 
     # Remove unnecessary spaces, but be careful not to turn "p :link {...}"
     # into "p:link{...}".
     css.gsub!(/(?:^|\})[^\{:]+\s+:+[^\{]*\{/) do |match|
-      match.gsub(':', '___PSEUDOCLASSCOLON___')
+      match.gsub ':', '___PSEUDOCLASSCOLON___'
     end
-    css.gsub!(/\s+([!\{\};:>+\(\)\],])/, '\1')
-    css.gsub!('___PSEUDOCLASSCOLON___', ':')
-    css.gsub!(/([!\{\}:;>+\(\[,])\s+/, '\1')
+    css.gsub! /\s+([!\{\};:>+\(\)\],])/, '\1'
+    css.gsub! '___PSEUDOCLASSCOLON___', ':'
+    css.gsub! /([!\{\}:;>+\(\[,])\s+/, '\1'
 
     # Add missing semicolons.
-    css.gsub!(/([^;\}])\}/, '\1;}')
+    css.gsub! /([^;\}])\}/, '\1;}'
 
     # Replace 0(%, em, ex, px, in, cm, mm, pt, pc) with just 0.
-    css.gsub!(/([\s:])([+-]?0)(?:%|em|ex|px|in|cm|mm|pt|pc)/i, '\1\2')
+    css.gsub! /([\s:])([+-]?0)(?:%|em|ex|px|in|cm|mm|pt|pc)/i, '\1\2'
 
     # Replace 0 0 0 0; with 0.
-    css.gsub!(/:(?:0 )+0;/, ':0;')
+    css.gsub! /:(?:0 )+0;/, ':0;'
 
     # Replace background-position:0; with background-position:0 0;
-    css.gsub!('background-position:0;', 'background-position:0 0;')
+    css.gsub! 'background-position:0;', 'background-position:0 0;'
 
     # Replace 0.6 with .6, but only when preceded by : or a space.
-    css.gsub!(/(:|\s)0+\.(\d+)/, '\1.\2')
+    css.gsub! /(:|\s)0+\.(\d+)/, '\1.\2'
 
     # Convert rgb color values to hex values.
     css.gsub!(/rgb\s*\(\s*([0-9,\s]+)\s*\)/) do |match|
@@ -93,22 +93,22 @@ module CSSMin
 
     # Compress color hex values, making sure not to touch values used in IE
     # filters, since they would break.
-    css.gsub!(/([^"'=\s])(\s?)\s*#([0-9a-f])\3([0-9a-f])\4([0-9a-f])\5/i, '\1\2#\3\4\5')
+    css.gsub! /([^"'=\s])(\s?)\s*#([0-9a-f])\3([0-9a-f])\4([0-9a-f])\5/i, '\1\2#\3\4\5'
 
     # Remove empty rules.
-    css.gsub!(/[^\}]+\{;\}\n/, '')
+    css.gsub! /[^\}]+\{;\}\n/, ''
 
     # Re-insert box model hacks.
-    css.gsub!('___BMH___', '"\"}\""')
+    css.gsub! '___BMH___', '"\"}\""'
 
     # Put the space back in for media queries
-    css.gsub!(/\band\(/, 'and (')
+    css.gsub! /\band\(/, 'and ('
 
     # Prevent redundant semicolons.
-    css.gsub!(/;+\}/, '}')
+    css.gsub! /;+\}/, '}'
 
-    css.gsub!(/(\W)border:none(\W)/, '\1border:0\2')
-    css.gsub!(/(\W)background:none(\W)/, '\1background:0\2')
+    css.gsub! /(\W)border:none(\W)/, '\1border:0\2'
+    css.gsub! /(\W)background:none(\W)/, '\1background:0\2'
 
     css.strip
   end
